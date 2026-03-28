@@ -1,0 +1,25 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "tailwindcss";
+
+
+
+
+/* ============================================
+   ESTILOS GLOBALES — M.A Modular
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: #F5F2ED;
+}
