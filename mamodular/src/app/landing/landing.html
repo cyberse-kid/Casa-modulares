@@ -5,71 +5,59 @@
   [class.nav-top]="!isScrolled()">
 
   <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between py-6 lg:py-8">
-    <!-- logo + links -->
 
     <!-- Logo -->
-    <button (click)="scrollTo('inicio')" class="flex items-center gap-3 group">
-      <div class="logo-icon">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <path d="M16 4 L28 14 L28 28 L4 28 L4 14 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          <path d="M12 28 L12 20 L20 20 L20 28" stroke="currentColor" stroke-width="1.5" fill="none"/>
-        </svg>
-      </div>
+    <a href="#inicio" (click)="scrollTo('inicio'); $event.preventDefault()" class="flex items-center gap-3">
+      <img src="logo.png" alt="MA Modular" class="logo-img"/>
       <div class="flex flex-col leading-none">
-        <span class="font-display text-sm font-bold tracking-widest uppercase">MA Modular</span>
-        <span class="text-xs tracking-widest uppercase opacity-60 font-light">Arquitectura que se siente</span>
+        <span class="logo-name">MA Modular</span>
+        <span class="logo-sub">Arquitectura que se siente</span>
       </div>
-    </button>
+    </a>
 
     <!-- Desktop Nav -->
     <div class="hidden lg:flex items-center gap-10">
-      <button *ngFor="let link of [
-        {label:'Modelos', id:'modelos'},
-        {label:'Proyectos', id:'proyectos'},
-        {label:'Proceso', id:'proceso'},
-        {label:'Contacto', id:'contacto'}
-      ]"
-        (click)="scrollTo(link.id)"
-        class="nav-link text-sm tracking-widest uppercase font-medium">
+      <a
+        *ngFor="let link of navLinks"
+        [href]="'#' + link.id"
+        (click)="scrollTo(link.id); $event.preventDefault()"
+        class="nav-link">
         {{ link.label }}
-      </button>
-      <button (click)="openWhatsAppCotizar()" class="btn-primary-sm">
+      </a>
+      <a routerLink="/casas-piloto" class="nav-link">Proyectos</a>
+      <a [href]="whatsappCotizarUrl" target="_blank" rel="noopener" class="btn-primary-sm">
         Cotizar ahora →
-      </button>
+      </a>
     </div>
 
     <!-- Mobile Hamburger -->
-    <button (click)="toggleMenu()" class="lg:hidden p-2 flex flex-col gap-1.5 group">
-      <span class="hamburger-line" [class.rotate-45]="isMenuOpen()" [class.translate-y-2]="isMenuOpen()"></span>
-      <span class="hamburger-line" [class.opacity-0]="isMenuOpen()"></span>
-      <span class="hamburger-line" [class.-rotate-45]="isMenuOpen()" [class.-translate-y-2]="isMenuOpen()"></span>
+    <button (click)="toggleMenu()" class="lg:hidden p-2 flex flex-col gap-1.5">
+      <span class="hamburger-line" [class.open-1]="isMenuOpen()"></span>
+      <span class="hamburger-line" [class.open-2]="isMenuOpen()"></span>
+      <span class="hamburger-line" [class.open-3]="isMenuOpen()"></span>
     </button>
   </div>
 
   <!-- Mobile Menu -->
   <div class="mobile-menu lg:hidden" [class.open]="isMenuOpen()">
     <div class="flex flex-col py-8 px-6 gap-6">
-      <button *ngFor="let link of [
-        {label:'Modelos', id:'modelos'},
-        {label:'Proyectos', id:'proyectos'},
-        {label:'Proceso', id:'proceso'},
-        {label:'Contacto', id:'contacto'}
-      ]"
-        (click)="scrollTo(link.id)"
-        class="text-left text-2xl font-display font-light tracking-wide border-b border-stone-800 pb-4">
+      <a
+        *ngFor="let link of navLinks"
+        [href]="'#' + link.id"
+        (click)="scrollTo(link.id); $event.preventDefault()"
+        class="mobile-nav-link">
         {{ link.label }}
-      </button>
-      <button (click)="openWhatsAppCotizar()" class="btn-primary mt-4 text-center">
+      </a>
+      <a routerLink="/casas-piloto" class="mobile-nav-link">Proyectos</a>
+      <a [href]="whatsappCotizarUrl" target="_blank" rel="noopener" class="btn-primary mt-4 text-center">
         Cotizar ahora →
-      </button>
+      </a>
     </div>
   </div>
 </nav>
 
 <!-- ===================== HERO ===================== -->
 <section id="inicio" class="hero-section relative min-h-screen flex flex-col">
-
-  <!-- Background image con overlay -->
   <div class="hero-bg absolute inset-0">
     <img
       src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800&q=85"
@@ -78,38 +66,32 @@
     <div class="hero-overlay absolute inset-0"></div>
   </div>
 
-  <!-- Content -->
-  <div class="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 lg:px-10 pt-28 pb-16">
-
+  <div class="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 lg:px-10 pt-36 pb-16">
     <p class="hero-eyebrow animate-fade-up" style="animation-delay:0.1s">
       Arquitectura Modular · Hecha a Medida
     </p>
-
     <h1 class="hero-title animate-fade-up" style="animation-delay:0.25s">
       Tu hogar,<br>
       <span class="text-accent">donde tú decides.</span>
     </h1>
-
     <p class="hero-subtitle animate-fade-up" style="animation-delay:0.4s">
       Diseñamos y construimos casas modulares sustentables, entregadas llave en mano.<br class="hidden md:block">
       Fabricación en taller, instalación en menos de 30 días.
     </p>
-
     <div class="flex flex-col sm:flex-row gap-4 mt-10 animate-fade-up" style="animation-delay:0.55s">
-      <button (click)="scrollTo('modelos')" class="btn-primary">
+      <a href="#modelos" (click)="scrollTo('modelos'); $event.preventDefault()" class="btn-primary">
         Ver Módulos →
-      </button>
-      <button (click)="scrollTo('proceso')" class="btn-ghost">
+      </a>
+      <a href="#proceso" (click)="scrollTo('proceso'); $event.preventDefault()" class="btn-ghost">
         Conoce Nuestra Historia
-      </button>
+      </a>
     </div>
   </div>
 
-  <!-- Scroll hint -->
   <div class="relative z-10 text-center pb-8 animate-bounce-slow">
-    <button (click)="scrollTo('stats')" class="text-white/50 text-xs tracking-widest uppercase flex flex-col items-center gap-2 mx-auto">
+    <a href="#stats" (click)="scrollTo('stats'); $event.preventDefault()" class="scroll-hint">
       <span>↓ Explorar</span>
-    </button>
+    </a>
   </div>
 </section>
 
@@ -128,38 +110,26 @@
 <!-- ===================== MODELOS ===================== -->
 <section id="modelos" class="section-light">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
     <div class="section-header">
       <p class="section-eyebrow">— Nuestros Módulos —</p>
       <h2 class="section-title">Elige el espacio que necesitas.</h2>
       <p class="section-subtitle">Cada modelo se entrega completamente terminado, con instalaciones incluidas.</p>
     </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-14">
-
-      <!-- Desktop: cards horizontales en mobile -->
-      <div *ngFor="let modelo of modelos; let i = index"
-           class="modelo-card group"
-           [style.animation-delay]="(i * 0.15) + 's'">
-
-        <!-- Mobile: horizontal layout -->
+      <div *ngFor="let modelo of modelos" class="modelo-card group">
         <div class="flex md:block gap-4">
-
-          <!-- Image -->
           <div class="modelo-img-wrap flex-shrink-0 w-32 h-32 md:w-full md:h-64 relative overflow-hidden rounded-lg md:rounded-b-none">
             <img [src]="modelo.imagen" [alt]="modelo.nombre"
                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
             <span class="modelo-tag">{{ modelo.tag }}</span>
           </div>
-
-          <!-- Info -->
           <div class="flex-1 md:p-6 py-1">
             <h3 class="modelo-nombre">{{ modelo.nombre }}</h3>
             <p class="modelo-metros">{{ modelo.metros }}</p>
             <p class="modelo-desc">{{ modelo.descripcion }}</p>
-            <button (click)="openWhatsApp()" class="modelo-link mt-3">
+            <a [routerLink]="['/casas-piloto']" [fragment]="modelo.nombre.toLowerCase()" class="modelo-link mt-3">
               Ver detalle →
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -171,36 +141,25 @@
 <section class="cta-banner">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
-
-      <!-- Logo + tagline -->
       <div class="flex items-center gap-5">
-        <div class="logo-icon-dark">
-          <svg width="36" height="36" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4 L28 14 L28 28 L4 28 L4 14 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <path d="M12 28 L12 20 L20 20 L20 28" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
+        <img src="logo.png" alt="MA Modular" class="logo-img logo-img--sm"/>
         <div>
           <p class="font-display font-bold text-white tracking-widest uppercase text-sm">MA Modular</p>
           <p class="text-white/60 text-xs tracking-wider">Arquitectura que se siente</p>
         </div>
       </div>
-
-      <!-- Quote -->
       <p class="cta-quote text-center lg:text-left">
         "Construimos el espacio donde comienza tu nueva vida."
       </p>
       <p class="text-white/50 text-xs text-center hidden lg:block">
         Casas modulares sustentables · Entrega llave en mano · Instalación rápida
       </p>
-
-      <!-- CTA -->
-      <button (click)="openWhatsApp()" class="btn-whatsapp-cta flex-shrink-0">
+      <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-whatsapp-cta flex-shrink-0">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
         </svg>
         Cotizar por WhatsApp
-      </button>
+      </a>
     </div>
   </div>
 </section>
@@ -208,30 +167,20 @@
 <!-- ===================== PROCESO ===================== -->
 <section id="proceso" class="section-light">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
-
     <div class="section-header">
       <p class="section-eyebrow">— El Proceso —</p>
       <h2 class="section-title">Simple. Claro. Sin sorpresas.</h2>
     </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 mt-14 proceso-grid">
-      <div *ngFor="let paso of proceso; let i = index"
-           class="paso-item"
-           [style.animation-delay]="(i * 0.1) + 's'">
+      <div *ngFor="let paso of proceso" class="paso-item">
         <span class="paso-numero">{{ paso.numero }}</span>
         <div class="paso-divider"></div>
         <h3 class="paso-titulo">{{ paso.titulo }}</h3>
         <p class="paso-desc">{{ paso.descripcion }}</p>
       </div>
     </div>
-
-    <!-- Stats finales -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-0 mt-16 border-t border-stone-200 pt-12">
-      <div *ngFor="let stat of [
-        {valor:'+50', label:'casas entregadas en Chile'},
-        {valor:'30 días', label:'es nuestro plazo de entrega'},
-        {valor:'100%', label:'personalizable desde 28 m²'}
-      ]" class="text-center py-8 border-b sm:border-b-0 sm:border-r border-stone-200 last:border-0">
+      <div *ngFor="let stat of statsFinales" class="text-center py-8 border-b sm:border-b-0 sm:border-r border-stone-200 last:border-0">
         <span class="block text-5xl lg:text-6xl font-display font-bold text-stone-900 mb-2">{{ stat.valor }}</span>
         <span class="text-sm text-stone-500 tracking-wide">{{ stat.label }}</span>
       </div>
@@ -241,7 +190,6 @@
 
 <!-- ===================== TESTIMONIAL ===================== -->
 <section id="proyectos" class="testimonial-section">
-  <!-- Full bleed image -->
   <div class="testimonial-img-wrap">
     <img
       src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85"
@@ -249,8 +197,6 @@
       class="w-full h-full object-cover"/>
     <div class="testimonial-overlay absolute inset-0"></div>
   </div>
-
-  <!-- Quote -->
   <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-24 lg:py-32">
     <p class="section-eyebrow text-white/50">— Lo que dicen nuestros clientes —</p>
     <blockquote class="testimonial-quote mt-8">
@@ -260,7 +206,7 @@
   </div>
 </section>
 
-<!-- ===================== CONTACTO / CTA FINAL ===================== -->
+<!-- ===================== CONTACTO ===================== -->
 <section id="contacto" class="section-dark">
   <div class="max-w-3xl mx-auto px-6 text-center py-24 lg:py-32">
     <p class="section-eyebrow text-white/40">— Empieza hoy —</p>
@@ -270,13 +216,13 @@
     <p class="text-stone-400 text-lg mb-10">
       Respuesta en menos de 24 horas · Visita técnica sin costo
     </p>
-    <button (click)="openWhatsApp()" class="btn-primary text-lg px-10 py-5">
+    <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-primary text-lg px-10 py-5">
       Empieza tu proyecto →
-    </button>
+    </a>
     <div class="flex items-center justify-center gap-8 mt-12 text-stone-500 text-sm">
-      <a href="mailto:info@mamodular.cl" class="hover:text-white transition-colors">info@mamodular.cl</a>
+      <a href="mailto:info@mamodular.cl" class="hover:text-white transition-colors">info&#64;mamodular.cl</a>
       <span>·</span>
-      <span>+56 9 XXXX XXXX</span>
+      <span>+56 9 4226 2561</span>
       <span>·</span>
       <span>Santiago, Chile</span>
     </div>
@@ -287,44 +233,35 @@
 <footer class="footer">
   <div class="max-w-7xl mx-auto px-6 lg:px-10 py-10">
     <div class="flex flex-col lg:flex-row items-center justify-between gap-6">
-
-      <!-- Logo -->
       <div class="flex items-center gap-3">
-        <div class="logo-icon-sm">
-          <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4 L28 14 L28 28 L4 28 L4 14 Z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-            <path d="M12 28 L12 20 L20 20 L20 28" stroke="currentColor" stroke-width="1.5" fill="none"/>
-          </svg>
-        </div>
+        <img src="logo.png" alt="MA Modular" class="logo-img logo-img--xs"/>
         <div>
           <p class="font-display font-bold tracking-widest uppercase text-xs">MA Modular</p>
           <p class="text-xs text-stone-500">Arquitectura Modular</p>
         </div>
       </div>
-
-      <!-- Center -->
       <p class="text-stone-500 text-xs text-center">
-        www.mamodular.cl · info&#64;mamodular.cl · +56 9 XXXX XXXX · Santiago, Chile<br>
+        www.mamodular.cl · info&#64;mamodular.cl · +56 9 4226 2561 · Santiago, Chile<br>
         © 2025 MA Modular · Todos los derechos reservados
       </p>
-
-      <!-- Social -->
       <div class="flex items-center gap-6 text-xs text-stone-500">
         <a href="#" class="hover:text-stone-900 transition-colors tracking-wider uppercase">Instagram</a>
-        <button (click)="openWhatsApp()" class="hover:text-stone-900 transition-colors tracking-wider uppercase">WhatsApp</button>
+        <a [href]="whatsappUrl" target="_blank" rel="noopener" class="hover:text-stone-900 transition-colors tracking-wider uppercase">WhatsApp</a>
         <a href="#" class="hover:text-stone-900 transition-colors tracking-wider uppercase">LinkedIn</a>
       </div>
     </div>
   </div>
 </footer>
 
-<!-- ===================== WHATSAPP FLOATING BTN ===================== -->
-<button
-  (click)="openWhatsApp()"
+<!-- ===================== WHATSAPP FLOTANTE ===================== -->
+<a
+  [href]="whatsappUrl"
+  target="_blank"
+  rel="noopener"
   class="whatsapp-float"
   title="Cotizar por WhatsApp"
   aria-label="Abrir WhatsApp">
   <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
-</button>
+</a>
