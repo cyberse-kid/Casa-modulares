@@ -1,27 +1,6 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "dist/mamodular/server/server.mjs",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dist/mamodular/browser/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/favicon.ico",
-      "dest": "/dist/mamodular/browser/favicon.ico"
-    },
-    {
-      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|webmanifest|txt|woff|woff2))",
-      "dest": "/dist/mamodular/browser/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/mamodular/server/server.mjs"
-    }
-  ]
+  "buildCommand": "cd mamodular && npm install && npm run build",
+  "outputDirectory": "mamodular/dist/mamodular/browser",
+  "installCommand": "cd mamodular && npm install",
+  "framework": null
 }
