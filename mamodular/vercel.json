@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/mamodular",
+  "installCommand": "npm install",
+  "framework": null,
+  "functions": {
+    "dist/mamodular/server/server.mjs": {
+      "runtime": "nodejs22.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/dist/mamodular/browser/assets/$1"
+    },
+    {
+      "src": "/(.*\\.(js|css|ico|png|jpg|jpeg|svg|webmanifest|txt))",
+      "dest": "/dist/mamodular/browser/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/mamodular/server/server.mjs"
+    }
+  ]
+}
