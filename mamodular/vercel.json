@@ -1,9 +1,27 @@
 {
   "version": 2,
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
-  "framework": null,
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/dist/mamodular/server/server.mjs" }
+  "builds": [
+    {
+      "src": "dist/mamodular/server/server.mjs",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/mamodular/browser/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/favicon.ico",
+      "dest": "/dist/mamodular/browser/favicon.ico"
+    },
+    {
+      "src": "/(.*\\.(js|css|png|jpg|jpeg|svg|ico|webmanifest|txt|woff|woff2))",
+      "dest": "/dist/mamodular/browser/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/dist/mamodular/server/server.mjs"
+    }
   ]
 }
