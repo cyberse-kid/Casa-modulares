@@ -115,21 +115,26 @@
       <h2 class="section-title">Elige el espacio que necesitas.</h2>
       <p class="section-subtitle">Cada modelo se entrega completamente terminado, con instalaciones incluidas.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mt-14">
+    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 max-w-xl mx-auto mt-14">
       <div *ngFor="let modelo of modelos" class="modelo-card group">
-        <div class="flex md:block gap-4">
-          <div class="modelo-img-wrap flex-shrink-0 w-32 h-32 md:w-full md:h-64 relative overflow-hidden rounded-lg md:rounded-b-none">
+        <div class="md:flex gap-0">
+          <div class="modelo-img-wrap w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden rounded-lg md:rounded-r-none md:rounded-l-lg">
             <img [src]="modelo.imagen" [alt]="modelo.nombre"
-                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"/>
+                 class="w-full h-full object-cover object-bottom transition-transform duration-700 group-hover:scale-105"/>
             <span class="modelo-tag">{{ modelo.tag }}</span>
           </div>
-          <div class="flex-1 md:p-6 py-1">
-            <h3 class="modelo-nombre">{{ modelo.nombre }}</h3>
+          <div class="flex-1 p-6 md:p-10 flex flex-col justify-center">
+            <h3 class="modelo-nombre text-2xl">{{ modelo.nombre }}</h3>
             <p class="modelo-metros">{{ modelo.metros }}</p>
-            <p class="modelo-desc">{{ modelo.descripcion }}</p>
-            <a [routerLink]="['/casas-piloto']" [fragment]="modelo.nombre.toLowerCase()" class="modelo-link mt-3">
-              Ver detalle →
-            </a>
+            <p class="modelo-desc mt-2">{{ modelo.descripcion }}</p>
+            <div class="mt-4 flex items-center gap-4">
+              <a [routerLink]="['/casas-piloto']" class="modelo-link">
+                Ver detalle →
+              </a>
+              <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-primary text-sm px-6 py-3">
+                Cotizar →
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -190,15 +195,8 @@
 
 <!-- ===================== TESTIMONIAL ===================== -->
 <section id="proyectos" class="testimonial-section">
-  <div class="testimonial-img-wrap">
-    <img
-      src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85"
-      alt="Proyecto MA Modular"
-      class="w-full h-full object-cover"/>
-    <div class="testimonial-overlay absolute inset-0"></div>
-  </div>
   <div class="relative z-10 max-w-4xl mx-auto px-6 text-center py-24 lg:py-32">
-    <p class="section-eyebrow text-white/50">— Lo que dicen nuestros clientes —</p>
+    <p class="section-eyebrow">— Lo que dicen nuestros clientes —</p>
     <blockquote class="testimonial-quote mt-8">
       "En 25 días ya estábamos viviendo en nuestra casa."
     </blockquote>

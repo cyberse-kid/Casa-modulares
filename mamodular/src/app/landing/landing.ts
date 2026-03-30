@@ -41,20 +41,6 @@ export class Landing implements OnInit, OnDestroy {
 
   readonly modelos: Modelo[] = [
     {
-      nombre: 'Compact',
-      metros: '28 – 38 m²',
-      descripcion: 'Ideal para guest house, oficina o cabaña.',
-      imagen: 'modulos/modulo1.jpeg',
-      tag: '28 m²'
-    },
-    {
-      nombre: 'Living',
-      metros: '48 – 60 m²',
-      descripcion: 'La opción más popular. Perfecta para familia.',
-      imagen: 'modulos/modulo2.jpeg',
-      tag: '48 m²'
-    },
-    {
       nombre: 'Premium',
       metros: '72 – 90 m²',
       descripcion: 'Máxima amplitud y terminaciones de lujo.',
