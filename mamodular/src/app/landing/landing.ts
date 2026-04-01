@@ -29,8 +29,8 @@ export class Landing implements OnInit, OnDestroy {
 
   onSplashDone(): void { this.pageReady = true; }
 
-  readonly whatsappUrl        = `https://wa.me/56942262561?text=${encodeURIComponent('Hola, me interesa cotizar una casa modular. ¿Podemos hablar?')}`;
-  readonly whatsappCotizarUrl = `https://wa.me/56942262561?text=${encodeURIComponent('Hola, quiero cotizar mi proyecto de casa modular.')}`;
+  readonly whatsappUrl        = `https://wa.me/56931760725?text=${encodeURIComponent('Hola, me interesa cotizar una casa modular. ¿Podemos hablar?')}`;
+  readonly whatsappCotizarUrl = `https://wa.me/56931760725?text=${encodeURIComponent('Hola, quiero cotizar mi proyecto de casa modular.')}`;
 
   readonly navLinks: NavLink[] = [
     { label: 'Modelos',        id: 'modelos'   },

@@ -83,7 +83,7 @@ export class CasasPiloto {
   ];
 
   getWhatsappUrl(m: Modelo): string {
-    return `https://wa.me/56942262561?text=${encodeURIComponent(m.whatsappMsg)}`;
+    return `https://wa.me/56931760725?text=${encodeURIComponent(m.whatsappMsg)}`;
   }
 
   scrollToModelo(id: string): void {
