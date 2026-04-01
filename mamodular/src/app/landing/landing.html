@@ -1,3 +1,9 @@
+<!-- SPLASH -->
+<app-splash (splashDone)="onSplashDone()"></app-splash>
+
+<!-- PÁGINA -->
+<div [class.page-hidden]="!pageReady" [class.page-visible]="pageReady">
+
 <!-- ===================== NAVBAR ===================== -->
 <nav
   class="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
@@ -5,8 +11,6 @@
   [class.nav-top]="!isScrolled()">
 
   <div class="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between py-6 lg:py-8">
-
-    <!-- Logo -->
     <a href="#inicio" (click)="scrollTo('inicio'); $event.preventDefault()" class="flex items-center gap-3">
       <img src="logo.png" alt="MA Modular" class="logo-img"/>
       <div class="flex flex-col leading-none">
@@ -15,22 +19,16 @@
       </div>
     </a>
 
-    <!-- Desktop Nav -->
     <div class="hidden lg:flex items-center gap-10">
-      <a
-        *ngFor="let link of navLinks"
-        [href]="'#' + link.id"
-        (click)="scrollTo(link.id); $event.preventDefault()"
-        class="nav-link">
-        {{ link.label }}
-      </a>
-      <a routerLink="/casas-piloto" class="nav-link">Proyectos</a>
+      <a *ngFor="let link of navLinks"
+         [href]="'#' + link.id"
+         (click)="scrollTo(link.id); $event.preventDefault()"
+         class="nav-link">{{ link.label }}</a>
       <a [href]="whatsappCotizarUrl" target="_blank" rel="noopener" class="btn-primary-sm">
         Cotizar ahora →
       </a>
     </div>
 
-    <!-- Mobile Hamburger -->
     <button (click)="toggleMenu()" class="lg:hidden p-2 flex flex-col gap-1.5">
       <span class="hamburger-line" [class.open-1]="isMenuOpen()"></span>
       <span class="hamburger-line" [class.open-2]="isMenuOpen()"></span>
@@ -38,17 +36,12 @@
     </button>
   </div>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu lg:hidden" [class.open]="isMenuOpen()">
     <div class="flex flex-col py-8 px-6 gap-6">
-      <a
-        *ngFor="let link of navLinks"
-        [href]="'#' + link.id"
-        (click)="scrollTo(link.id); $event.preventDefault()"
-        class="mobile-nav-link">
-        {{ link.label }}
-      </a>
-      <a routerLink="/casas-piloto" class="mobile-nav-link">Proyectos</a>
+      <a *ngFor="let link of navLinks"
+         [href]="'#' + link.id"
+         (click)="scrollTo(link.id); $event.preventDefault()"
+         class="mobile-nav-link">{{ link.label }}</a>
       <a [href]="whatsappCotizarUrl" target="_blank" rel="noopener" class="btn-primary mt-4 text-center">
         Cotizar ahora →
       </a>
@@ -59,20 +52,14 @@
 <!-- ===================== HERO ===================== -->
 <section id="inicio" class="hero-section relative min-h-screen flex flex-col">
   <div class="hero-bg absolute inset-0">
-    <img
-      src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800&q=85"
-      alt="Casa modular MA Modular"
-      class="w-full h-full object-cover"/>
+    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1800&q=85"
+         alt="Casa modular MA Modular" class="w-full h-full object-cover"/>
     <div class="hero-overlay absolute inset-0"></div>
   </div>
-
   <div class="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto px-6 lg:px-10 pt-36 pb-16">
-    <p class="hero-eyebrow animate-fade-up" style="animation-delay:0.1s">
-      Arquitectura Modular · Hecha a Medida
-    </p>
+    <p class="hero-eyebrow animate-fade-up" style="animation-delay:0.1s">Arquitectura Modular · Hecha a Medida</p>
     <h1 class="hero-title animate-fade-up" style="animation-delay:0.25s">
-      Tu hogar,<br>
-      <span class="text-accent">donde tú decides.</span>
+      Tu hogar,<br><span class="text-accent">donde tú decides.</span>
     </h1>
     <p class="hero-subtitle animate-fade-up" style="animation-delay:0.4s">
       Diseñamos y construimos casas modulares sustentables, entregadas llave en mano.<br class="hidden md:block">
@@ -80,14 +67,13 @@
     </p>
     <div class="flex flex-col sm:flex-row gap-4 mt-10 animate-fade-up" style="animation-delay:0.55s">
       <a href="#modelos" (click)="scrollTo('modelos'); $event.preventDefault()" class="btn-primary">
-        Ver Módulos →
+        Ver Modelos →
       </a>
-      <a href="#proceso" (click)="scrollTo('proceso'); $event.preventDefault()" class="btn-ghost">
+      <a href="#historia" (click)="scrollTo('historia'); $event.preventDefault()" class="btn-ghost">
         Conoce Nuestra Historia
       </a>
     </div>
   </div>
-
   <div class="relative z-10 text-center pb-8 animate-bounce-slow">
     <a href="#stats" (click)="scrollTo('stats'); $event.preventDefault()" class="scroll-hint">
       <span>↓ Explorar</span>
@@ -111,33 +97,76 @@
 <section id="modelos" class="section-light">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="section-header">
-      <p class="section-eyebrow">— Nuestros Módulos —</p>
-      <h2 class="section-title">Elige el espacio que necesitas.</h2>
-      <p class="section-subtitle">Cada modelo se entrega completamente terminado, con instalaciones incluidas.</p>
+      <p class="section-eyebrow">— Nuestros Modelos —</p>
+      <h2 class="section-title">Soluciones para cada visión.</h2>
+      <p class="section-subtitle">Dos líneas de diseño. Un solo compromiso: calidad, sustentabilidad y entrega llave en mano.</p>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 max-w-xl mx-auto mt-14">
-      <div *ngFor="let modelo of modelos" class="modelo-card group">
-        <div class="md:flex gap-0">
-          <div class="modelo-img-wrap w-full md:w-1/2 h-64 md:h-80 relative overflow-hidden rounded-lg md:rounded-r-none md:rounded-l-lg">
-            <img [src]="modelo.imagen" [alt]="modelo.nombre"
-                 class="w-full h-full object-cover object-bottom transition-transform duration-700 group-hover:scale-105"/>
-            <span class="modelo-tag">{{ modelo.tag }}</span>
+
+    <div class="modelos-grid mt-14">
+      <div *ngFor="let modelo of modelos" class="modelo-card-v2 group">
+        <!-- Imagen -->
+        <div class="modelo-card-v2__img-wrap">
+          <img [src]="modelo.imagen" [alt]="modelo.nombre"
+               class="modelo-card-v2__img transition-transform duration-700 group-hover:scale-105"/>
+          <span class="modelo-tag">{{ modelo.tag }}</span>
+        </div>
+        <!-- Info -->
+        <div class="modelo-card-v2__body">
+          <p class="modelo-card-v2__sub">{{ modelo.subtitulo }}</p>
+          <h3 class="modelo-card-v2__nombre">{{ modelo.nombre }}</h3>
+          <p class="modelo-card-v2__desc">{{ modelo.descripcion }}</p>
+          <a [routerLink]="['/casas-piloto']" [fragment]="modelo.id" class="modelo-card-v2__link">
+            Ver más detalles →
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NUESTRA HISTORIA ===================== -->
+<section id="historia" class="historia-section">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="historia-inner">
+
+      <!-- Texto -->
+      <div class="historia-texto">
+        <p class="section-eyebrow">— Nuestra Historia —</p>
+        <h2 class="historia-titulo">Arquitectura con propósito.</h2>
+        <p class="historia-parrafo">
+          MA Modular nació de una convicción simple: que vivir bien no debería ser un privilegio de pocos ni tardar años en construirse. Somos un equipo de arquitectos y constructores que cree en la precisión industrial como herramienta de diseño.
+        </p>
+        <p class="historia-parrafo">
+          Cada casa que fabricamos lleva consigo un compromiso con la sustentabilidad, la eficiencia energética y el respeto por el entorno. No construimos módulos en serie — construimos espacios que se adaptan a la vida real de cada familia.
+        </p>
+        <p class="historia-parrafo">
+          Desde Santiago operamos en todo Chile, entregando proyectos llave en mano con la misma calidad y detalle, desde la costa hasta la cordillera.
+        </p>
+        <div class="historia-valores">
+          <div class="historia-valor">
+            <span class="historia-valor__icono">🌱</span>
+            <span class="historia-valor__texto">Sustentabilidad</span>
           </div>
-          <div class="flex-1 p-6 md:p-10 flex flex-col justify-center">
-            <h3 class="modelo-nombre text-2xl">{{ modelo.nombre }}</h3>
-            <p class="modelo-metros">{{ modelo.metros }}</p>
-            <p class="modelo-desc mt-2">{{ modelo.descripcion }}</p>
-            <div class="mt-4 flex items-center gap-4">
-              <a [routerLink]="['/casas-piloto']" class="modelo-link">
-                Ver detalle →
-              </a>
-              <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-primary text-sm px-6 py-3">
-                Cotizar →
-              </a>
-            </div>
+          <div class="historia-valor">
+            <span class="historia-valor__icono">⚙️</span>
+            <span class="historia-valor__texto">Precisión Industrial</span>
+          </div>
+          <div class="historia-valor">
+            <span class="historia-valor__icono">🏡</span>
+            <span class="historia-valor__texto">Diseño a Medida</span>
           </div>
         </div>
       </div>
+
+      <!-- Imagen -->
+      <div class="historia-imagen">
+        <img src="modulos/tiny.jpeg" alt="MA Modular — Nuestra Historia" class="historia-img"/>
+        <div class="historia-imagen__badge">
+          <span class="historia-imagen__num">+50</span>
+          <span class="historia-imagen__label">casas entregadas</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -211,16 +240,14 @@
     <h2 class="text-4xl lg:text-6xl font-display font-bold text-white mt-4 mb-6 leading-tight">
       ¿Listo para construir tu espacio?
     </h2>
-    <p class="text-stone-400 text-lg mb-10">
-      Respuesta en menos de 24 horas · Visita técnica sin costo
-    </p>
+    <p class="text-stone-400 text-lg mb-10">Respuesta en menos de 24 horas · Visita técnica sin costo</p>
     <a [href]="whatsappUrl" target="_blank" rel="noopener" class="btn-primary text-lg px-10 py-5">
       Empieza tu proyecto →
     </a>
     <div class="flex items-center justify-center gap-8 mt-12 text-stone-500 text-sm">
-      <a href="mailto:info@mamodular.cl" class="hover:text-white transition-colors">info&#64;mamodular.cl</a>
+      <a href="mailto:CMODULAR8@gmail.com" class="hover:text-white transition-colors">CMODULAR8&#64;gmail.com</a>
       <span>·</span>
-      <span>+56 9 4226 2561</span>
+      <span>+569 3176 0725</span>
       <span>·</span>
       <span>Santiago, Chile</span>
     </div>
@@ -239,7 +266,7 @@
         </div>
       </div>
       <p class="text-stone-500 text-xs text-center">
-        www.mamodular.cl · info&#64;mamodular.cl · +56 9 4226 2561 · Santiago, Chile<br>
+        www.mamodular.cl · CMODULAR8&#64;gmail.com · +569 3176 0725 · Santiago, Chile<br>
         © 2025 MA Modular · Todos los derechos reservados
       </p>
       <div class="flex items-center gap-6 text-xs text-stone-500">
@@ -251,15 +278,11 @@
   </div>
 </footer>
 
-<!-- ===================== WHATSAPP FLOTANTE ===================== -->
-<a
-  [href]="whatsappUrl"
-  target="_blank"
-  rel="noopener"
-  class="whatsapp-float"
-  title="Cotizar por WhatsApp"
-  aria-label="Abrir WhatsApp">
+<!-- WHATSAPP FLOTANTE -->
+<a [href]="whatsappUrl" target="_blank" rel="noopener" class="whatsapp-float" title="Cotizar por WhatsApp" aria-label="Abrir WhatsApp">
   <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
   </svg>
 </a>
+
+</div><!-- /page -->

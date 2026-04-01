@@ -646,3 +646,205 @@
   transition: color 0.2s;
 }
 .mobile-nav-link:hover { color: var(--accent); }
+
+/* ========== SPLASH → PAGE TRANSITION ========== */
+.page-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.page-visible {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+/* ========== MODELOS V2 GRID ========== */
+.modelos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .modelos-grid { grid-template-columns: 1fr; }
+}
+
+.modelo-card-v2 {
+  background: white;
+  overflow: hidden;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.modelo-card-v2:hover {
+  box-shadow: 0 20px 48px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+}
+
+.modelo-card-v2__img-wrap {
+  position: relative;
+  height: 320px;
+  overflow: hidden;
+}
+.modelo-card-v2__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+.modelo-card-v2__body {
+  padding: 2rem;
+}
+
+.modelo-card-v2__sub {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+.modelo-card-v2__nombre {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 1rem;
+  line-height: 1.1;
+}
+
+.modelo-card-v2__desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: #5a5652;
+  line-height: 1.75;
+  font-weight: 400;
+  margin: 0 0 1.5rem;
+}
+
+.modelo-card-v2__link {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: transparent;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+.modelo-card-v2__link:hover {
+  color: var(--accent-light);
+  border-bottom-color: var(--accent-light);
+}
+
+/* ========== NUESTRA HISTORIA ========== */
+.historia-section {
+  background: var(--dark);
+  padding: 6rem 0;
+}
+
+.historia-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .historia-inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+
+.historia-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  color: white;
+  margin: 0.5rem 0 1.5rem;
+  line-height: 1.1;
+}
+
+.historia-parrafo {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.85;
+  font-weight: 300;
+  margin: 0 0 1.25rem;
+}
+
+.historia-valores {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.historia-valor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.historia-valor__icono {
+  font-size: 1.25rem;
+}
+
+.historia-valor__texto {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+}
+
+.historia-imagen {
+  position: relative;
+}
+
+.historia-img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  object-position: center 60%;
+  display: block;
+}
+
+.historia-imagen__badge {
+  position: absolute;
+  bottom: -1.5rem;
+  left: -1.5rem;
+  background: var(--accent);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.historia-imagen__num {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.historia-imagen__label {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+}
+
+@media (max-width: 900px) {
+  .historia-imagen__badge {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}

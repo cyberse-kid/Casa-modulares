@@ -4,16 +4,17 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Splash } from '../splash/splash';
 
 interface NavLink  { label: string; id: string; }
 interface StatItem { valor: string; label: string; }
-interface Modelo   { nombre: string; metros: string; descripcion: string; imagen: string; tag: string; }
+interface Modelo   { id: string; nombre: string; subtitulo: string; metros: string; descripcion: string; imagen: string; tag: string; }
 interface Paso     { numero: string; titulo: string; descripcion: string; }
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, Splash],
   templateUrl: './landing.html',
   styleUrl: './landing.css'
 })
@@ -24,28 +25,38 @@ export class Landing implements OnInit, OnDestroy {
 
   isMenuOpen    = signal(false);
   isScrolled    = signal(false);
+  pageReady     = true;
 
-  readonly whatsappNumber  = '56942262561';
-  readonly whatsappMessage = encodeURIComponent('Hola, me interesa cotizar una casa modular. ¿Podemos hablar?');
-  readonly whatsappMsgCotizar = encodeURIComponent('Hola, quiero cotizar mi proyecto de casa modular.');
+  onSplashDone(): void { this.pageReady = true; }
 
-  // URLs precalculadas — sin window.open, funcionan como <a href>
   readonly whatsappUrl        = `https://wa.me/56942262561?text=${encodeURIComponent('Hola, me interesa cotizar una casa modular. ¿Podemos hablar?')}`;
   readonly whatsappCotizarUrl = `https://wa.me/56942262561?text=${encodeURIComponent('Hola, quiero cotizar mi proyecto de casa modular.')}`;
 
   readonly navLinks: NavLink[] = [
-    { label: 'Modelos',  id: 'modelos'  },
-    { label: 'Proceso',  id: 'proceso'  },
-    { label: 'Contacto', id: 'contacto' },
+    { label: 'Modelos',        id: 'modelos'   },
+    { label: 'Nuestra Historia', id: 'historia' },
+    { label: 'Proceso',        id: 'proceso'   },
+    { label: 'Contacto',       id: 'contacto'  },
   ];
 
   readonly modelos: Modelo[] = [
     {
-      nombre: 'Premium',
-      metros: '72 – 90 m²',
-      descripcion: 'Máxima amplitud y terminaciones de lujo.',
+      id: 'personalizada',
+      nombre: 'Casa Personalizada',
+      subtitulo: 'Diseñada para tu vida',
+      metros: 'A medida',
+      descripcion: 'Nos adaptamos completamente a tu estilo de vida, terreno y visión. Cada proyecto es único: diseñamos contigo cada espacio para que la casa refleje quién eres y cómo quieres vivir.',
       imagen: 'modulos/modulo3.jpeg',
-      tag: '72 m²'
+      tag: 'A medida'
+    },
+    {
+      id: 'tiny',
+      nombre: 'Casa Tiny',
+      subtitulo: 'Eficiencia con identidad',
+      metros: '35 m²',
+      descripcion: 'Diseño moderno y eficiente con alma propia. La Casa Tiny combina funcionalidad, sustentabilidad y estética contemporánea en un espacio compacto que no sacrifica calidad ni confort.',
+      imagen: 'modulos/tiny.jpeg',
+      tag: '35 m²'
     }
   ];
 
@@ -64,16 +75,14 @@ export class Landing implements OnInit, OnDestroy {
   ];
 
   readonly statsFinales: StatItem[] = [
-    { valor: '+50',     label: 'casas entregadas en Chile'    },
-    { valor: '30 días', label: 'es nuestro plazo de entrega'  },
-    { valor: '100%',    label: 'personalizable desde 28 m²'   }
+    { valor: '+50',     label: 'casas entregadas en Chile'   },
+    { valor: '30 días', label: 'es nuestro plazo de entrega' },
+    { valor: '100%',    label: 'personalizable desde 28 m²'  }
   ];
 
   @HostListener('window:scroll')
   onScroll(): void {
-    if (this.isBrowser) {
-      this.isScrolled.set(window.scrollY > 80);
-    }
+    if (this.isBrowser) this.isScrolled.set(window.scrollY > 80);
   }
 
   ngOnInit(): void {}

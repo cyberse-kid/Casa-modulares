@@ -1,11 +1,15 @@
 import {
-  Component, OnInit, AfterViewInit,
-  signal, inject, PLATFORM_ID
+  Component, inject, PLATFORM_ID
 } from '@angular/core';
-import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { RouterModule, ActivatedRoute } from '@angular/router';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
-export interface Spec { label: string; valor: string; }
+export interface Spec { icono: string; label: string; valor: string; }
+export interface Modelo {
+  id: string; nombre: string; subtitulo: string;
+  imagen: string; descripcion: string;
+  caracteristicas: string[]; specs: Spec[]; whatsappMsg: string;
+}
 
 @Component({
   selector: 'app-casas-piloto',
@@ -14,38 +18,79 @@ export interface Spec { label: string; valor: string; }
   templateUrl: './casas-piloto.html',
   styleUrl: './casas-piloto.css'
 })
-export class CasasPiloto implements OnInit, AfterViewInit {
+export class CasasPiloto {
 
   private readonly platformId = inject(PLATFORM_ID);
-  private readonly doc        = inject(DOCUMENT);
-  private readonly route      = inject(ActivatedRoute);
   private get isBrowser(): boolean { return isPlatformBrowser(this.platformId); }
 
-  readonly whatsappUrl = `https://wa.me/56942262561?text=${encodeURIComponent('Hola, me interesa cotizar la Tiny House Premium de 35m². ¿Pueden enviarme más información?')}`;
-
-  readonly caracteristicas: string[] = [
-    'Planos Arquitectura',
-    'Aislación / Ventilación',
-    'Diseño Moderno',
-    'Ampliables',
-    'Alto Estándar'
+  readonly modelos: Modelo[] = [
+    {
+      id: 'tiny',
+      nombre: 'Casa Tiny',
+      subtitulo: 'Eficiencia con identidad',
+      imagen: 'modulos/tiny.jpeg',
+      descripcion: 'Diseño moderno y eficiente con alma propia. La Casa Tiny combina funcionalidad, sustentabilidad y estética contemporánea. Equipada con artefactos marca WASSER en baño y FDV en cocina, creando un estilo moderno y funcional.',
+      caracteristicas: [
+        'Diseño moderno y funcional',
+        'Cocina equipada marca FDV',
+        'Baño con artefactos WASSER',
+        'Ampliable y transportable',
+        'Aislación y ventilación premium',
+        'Alto estándar de terminaciones',
+      ],
+      specs: [
+        { icono: '🏗️', label: 'Estructura',          valor: '75mm x 75mm en 3mm acero' },
+        { icono: '🌡️', label: 'Aislación',            valor: 'Lana POL. 50mm' },
+        { icono: '🪵', label: 'Revestimiento muros',  valor: 'TAB. OSB EST. 11mm' },
+        { icono: '🔲', label: 'Estructura piso',      valor: 'Terciado EST. 18mm' },
+        { icono: '🪟', label: 'Ventanas',              valor: 'Termopanel en PVC' },
+        { icono: '💡', label: 'Iluminación',           valor: 'Tipo LED' },
+        { icono: '🔌', label: 'Instalación eléct.',   valor: 'Completa certificada' },
+        { icono: '🛁', label: 'Baño',                  valor: 'Artefactos marca WASSER' },
+        { icono: '🍳', label: 'Cocina',                valor: 'Full equipada marca FDV' },
+        { icono: '🚚', label: 'Instalación',           valor: 'Llave en mano en 30 días' },
+      ],
+      whatsappMsg: 'Hola, me interesa cotizar la Casa Tiny de MA Modular. ¿Pueden enviarme más información?'
+    },
+    {
+      id: 'personalizada',
+      nombre: 'Casa Personalizada',
+      subtitulo: 'Diseñada para tu vida',
+      imagen: 'modulos/modulo3.jpeg',
+      descripcion: 'Nos adaptamos completamente a tu estilo de vida, terreno y visión. Cada proyecto es único: diseñamos contigo cada espacio para que la casa refleje quién eres y cómo quieres vivir. Sin límites de metros ni distribución fija.',
+      caracteristicas: [
+        'Diseño 100% personalizado',
+        'Adaptable a cualquier terreno',
+        'Planos arquitectónicos incluidos',
+        'Aislación y ventilación premium',
+        'Ampliable en el tiempo',
+        'Alto estándar de terminaciones',
+      ],
+      specs: [
+        { icono: '🏗️', label: 'Estructura',           valor: 'Perfil de acero galvanizado' },
+        { icono: '🌡️', label: 'Aislación',             valor: 'Lana mineral de alta densidad' },
+        { icono: '🪵', label: 'Revestimiento',         valor: 'Wallpanel / Metalsiding a elección' },
+        { icono: '🔲', label: 'Estructura piso',       valor: 'Terciado EST. 18mm' },
+        { icono: '🪟', label: 'Ventanas',               valor: 'Termopanel aluminio negro' },
+        { icono: '💡', label: 'Iluminación',            valor: 'Tipo LED integrado' },
+        { icono: '🔌', label: 'Instalación eléct.',    valor: 'Completa, certificada' },
+        { icono: '🚿', label: 'Instalación sanitaria', valor: 'Agua potable y alcantarillado' },
+        { icono: '🛡️', label: 'Barrera térmica',       valor: 'Membrana hidrófuga' },
+        { icono: '🚚', label: 'Instalación',            valor: 'Llave en mano en 30 días' },
+      ],
+      whatsappMsg: 'Hola, me interesa cotizar una Casa Personalizada MA Modular. ¿Pueden contactarme?'
+    }
   ];
 
-  readonly specsGenerales: Spec[] = [
-    { label: 'Espesor del Acero',      valor: '75mm x 75mm en 3mm' },
-    { label: 'Estructura Muros',       valor: 'METALCON 3\'x 4\' pul.' },
-    { label: 'Aislación',              valor: 'Lana POL. 50mm' },
-    { label: 'Revest. Muros',          valor: 'TAB. OSB EST. 11mm' },
-    { label: 'Estructura Piso',        valor: 'Terciado EST. 18mm' },
-    { label: 'Revestimiento Piso',     valor: 'Piso tipo Vinílico SPC' },
-    { label: 'Barrera Térmica',        valor: 'Membrana Hidrófuga' },
-    { label: 'Ventanas',               valor: 'Termopanel en PVC' },
-    { label: 'Revestimiento Exterior', valor: 'Wallpanel / Metalsiding' },
-    { label: 'Iluminación / Lámparas', valor: 'Tipo LED' },
-  ];
+  getWhatsappUrl(m: Modelo): string {
+    return `https://wa.me/56942262561?text=${encodeURIComponent(m.whatsappMsg)}`;
+  }
 
-  readonly colores: string[] = ['#1a1a1a', '#1e3a5f', '#6b4c2a', '#B5893A'];
-
-  ngOnInit(): void {}
-  ngAfterViewInit(): void {}
+  scrollToModelo(id: string): void {
+    if (!this.isBrowser) return;
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
+  }
 }
