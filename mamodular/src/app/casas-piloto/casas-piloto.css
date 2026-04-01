@@ -875,3 +875,34 @@
   height: auto;
   object-fit: contain;
 }
+
+/* ========== SPECS TABLA (estilo anterior) ========== */
+.cp-specs-table {
+  border: 1px solid var(--stone-200);
+  overflow: hidden;
+}
+
+.cp-specs-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 0.9rem 1.25rem;
+  border-bottom: 1px solid var(--stone-200);
+  background: white;
+}
+.cp-specs-row:last-child { border-bottom: none; }
+.cp-specs-row--alt { background: var(--stone-off); }
+
+.cp-specs-row__label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--dark);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cp-specs-row__valor {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--stone-500);
+}
